@@ -1,0 +1,238 @@
+{
+ "version": "3.0",
+ "description": "Paper Cards of the Time Series Agents survey: works, their modules, evidence, and evaluation.",
+ "contribution_layers": [
+  "LLM",
+  "GH",
+  "GTS",
+  "TSK"
+ ],
+ "dimensions": {
+  "Interface and Interaction": {
+   "second_level": [
+    "reasoning_loop",
+    "action_interface",
+    "environment_and_users"
+   ]
+  },
+  "Memory and Context": {
+   "second_level": [
+    "working_context",
+    "episodic_records",
+    "knowledge_retrieval",
+    "shared_state"
+   ]
+  },
+  "Tools and Execution": {
+   "second_level": [
+    "function_calls",
+    "code_and_job_execution",
+    "verification_tools"
+   ]
+  },
+  "Planning and Orchestration": {
+   "second_level": [
+    "decomposition_and_planning",
+    "execution_control",
+    "checkpoints_and_governance",
+    "multi_agent_coordination"
+   ]
+  },
+  "Optimization and Evolution": {
+   "second_level": [
+    "prompt_optimization",
+    "experience_distillation",
+    "tool_and_skill_evolution",
+    "harness_configuration_search"
+   ]
+  }
+ },
+ "second_level_note": "Second-level classes are a reading structure of the paper (Tables 3, 4, and 5); module records carry first-level labels only.",
+ "temporal_function_view": {
+  "description": "Non-exclusive Section 5 reading view over the same module records, not a replacement for the five dimensions or scope. Task membership does not determine module scope.",
+  "values": {
+   "data_management": "Temporal Data Management",
+   "processing": "Temporal Processing",
+   "context_memory": "Temporal Context and Memory",
+   "validation": "Temporal Validation"
+  },
+  "fields": [
+   "functions",
+   "view_status",
+   "rationale",
+   "evidence_indices",
+   "reuse_proposals",
+   "interface (when explicitly summarized)"
+  ],
+  "applicability": [
+   "mapped",
+   "resource_level",
+   "model_side",
+   "general_runtime",
+   "task_procedure"
+  ],
+  "counting": "Unique module id, regardless of functions or task memberships.",
+  "second_level": {
+   "data_management": [
+    "measurement_schema",
+    "time_index_and_alignment",
+    "point_in_time_access",
+    "temporal_workspace"
+   ],
+   "processing": [
+    "preprocessing_and_transformation",
+    "statistical_and_spectral_analysis",
+    "series_views_for_the_llm",
+    "operator_and_skill_libraries"
+   ],
+   "context_memory": [
+    "external_events_and_text",
+    "historical_analogues",
+    "procedural_experience"
+   ],
+   "validation": [
+    "availability_checks",
+    "past_only_computation",
+    "data_and_schema_checks",
+    "temporal_claim_verification"
+   ]
+  }
+ },
+ "task_grid": {
+  "description": "Output mode x time relative to the current time (scripts/task_groups.py CELL, --grid). Mode by how the output is checked: regression (numeric target), classification (discrete target), generation (no single target: text or new series), decision (an action, judged by consequences). Time: before = the output describes the observed record I_tau; after = the quantity becomes observable after tau.",
+  "cells": {
+   "regression:before": [
+    "imputation",
+    "estimation"
+   ],
+   "regression:after": [
+    "value_forecasting"
+   ],
+   "classification:before": [
+    "time_series_classification",
+    "anomaly_detection",
+    "root_cause_identification",
+    "closed_question_answering",
+    "segmentation"
+   ],
+   "classification:after": [
+    "event_forecasting"
+   ],
+   "generation:before": [
+    "description_and_explanation",
+    "synthesis_and_augmentation"
+   ],
+   "generation:after": [
+    "scenario_generation"
+   ],
+   "decision:after": [
+    "advisory_decision",
+    "autonomous_control"
+   ]
+  },
+  "forecast_form": [
+   "point_forecast",
+   "probabilistic_forecast"
+  ]
+ },
+ "task_families": [
+  "forecasting_prediction",
+  "data_augmentation_synthesis",
+  "anomaly_detection_diagnosis",
+  "decision_support"
+ ],
+ "task_aliases": {
+  "forecasting_reasoning": "forecasting_prediction",
+  "augmentation_synthesis": "data_augmentation_synthesis",
+  "question_answering": "temporal_question_answering",
+  "classification": "time_series_classification"
+ },
+ "llm_routes": {
+  "representation_alignment": "Temporal representation and alignment",
+  "instruction_reasoning": "Temporal instruction and reasoning",
+  "workflow_learning": "Learning to operate temporal workflows"
+ },
+ "module_roles": [
+  "method",
+  "model_training",
+  "training_data",
+  "infrastructure",
+  "evaluation"
+ ],
+ "roles_of_work": {
+  "llm_side_technique": "Supplies temporal encoding, understanding, reasoning, or prediction to the LLM.",
+  "fixed_workflow": "Executes a predetermined sequence of model and tool calls; returned outputs do not change which action comes next.",
+  "feedback_driven_agent": "Selects or revises subsequent actions according to observations returned by tools or environments.",
+  "resource": "Benchmark, environment, workbench, dataset or infrastructure that evaluates or hosts Time Series Agents.",
+  "background": "Relevant context but contributes no module of its own."
+ },
+ "reuse_evidence": {
+  "applies_to_layers": [
+   "GH",
+   "GTS"
+  ],
+  "levels": {
+   "demonstrated": "The source applies the module to two or more task families: those recorded for the module, or for the work when the module has none.",
+   "inferred": "The source applies the module to one task family; reuse across tasks is inferred from its inputs, state, and interface.",
+   "not_applicable": "LLM-side and Task-Specific Harness modules, whose scope is model-side or bound to a task objective."
+  },
+  "fields": {
+   "level": "One of the levels above.",
+   "tasks": "Canonical task families on which the source applies the module.",
+   "basis": "module or work: where the task families were recorded."
+  }
+ },
+ "evaluation_criteria": {
+  "process_validity": "Did the runtime execute the intended operations and handle failures?",
+  "temporal_validity": "Did the system preserve the data window, numerical meaning and information availability?",
+  "task_performance": "Accuracy of the task output.",
+  "decision_utility": "Value of a downstream action."
+ },
+ "work_level_fields": {
+  "role_of_work": "One of roles_of_work (rubric R0).",
+  "claim_evidence": "List of {locator, quote} supporting the claim summary.",
+  "evaluation_evidence": "For each evaluation criterion: {present, locator, quote}; present is true only with a quote from the work's own experiments (rubric R10).",
+  "task_impact": "Per task family: whether the work automates analysis steps, improves a metric, and which time series obstacles it targets and tests."
+ },
+ "reviewed_module_fields": [
+  "id",
+  "name",
+  "layer",
+  "dimensions",
+  "functions",
+  "view_status",
+  "llm_route",
+  "tasks",
+  "other_tasks",
+  "role",
+  "scope_reason",
+  "rubric_path",
+  "reuse_evidence",
+  "evidence"
+ ],
+ "evidence_locators": {
+  "page_line": "\"PDF p.X\": page of the source PDF that contains the quoted passage.",
+  "other": "Author release statements, hyperlink annotations, or README passages for repository-only sources."
+ },
+ "official_resources": {
+  "description": "Source-attributed external links; no implementation is copied or packaged. Availability is independent of authorship provenance.",
+  "fields": [
+   "kind",
+   "url",
+   "provenance",
+   "availability"
+  ],
+  "kinds": [
+   "repository",
+   "project",
+   "dataset",
+   "benchmark",
+   "documentation",
+   "model",
+   "evaluation_submission",
+   "leaderboard",
+   "research_artifacts"
+  ]
+ },
+ "agent_terminology": "claimed_as_agent records whether the work calls its system or components Agents."
+}
